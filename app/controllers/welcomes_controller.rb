@@ -7,6 +7,7 @@ class WelcomesController < ApplicationController
     end
 
     def checkout_page
+        @payment = Payment.create()
         @payment_id = "TESTHOST#{Time.now.strftime("%d%m%Y%H%M")}"
         @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}https://merchA.merchdomain.com/pymtresp.aspxhttps://merchA.merchdomain.com/pymtrespcallback.aspx228.00MYR192.168.2.35780")
     end

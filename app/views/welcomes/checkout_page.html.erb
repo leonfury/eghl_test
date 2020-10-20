@@ -19,8 +19,8 @@
     <input type="hidden" name="OrderNumber" value="IJKLMN">
     <input type="hidden" name="PaymentDesc" value="Booking No: IJKLMN, Sector: KUL-BKI, First Flight Date: 26 Sep 2012">
     <input type="hidden" name="MerchantName" value="Merchant A">
-    <input type="hidden" name="MerchantReturnURL" value="https://merchA.merchdomain.com/pymtresp.aspx">
-    <input type="hidden" name="MerchantCallbackURL" value="https://merchA.merchdomain.com/pymtrespcallback.aspx">
+    <input type="hidden" name="MerchantReturnURL" value="https://eghl-test.herokuapp.com/await_payment_response/<%= @payment.id %>">
+    <input type="hidden" name="MerchantCallbackURL" value="https://eghl-test.herokuapp.com/await_payment_response_backend/<%= @payment.id %>">
     <input type="hidden" name="Amount" value="228.00">
     <input type="hidden" name="CurrencyCode" value="MYR">
     <input type="hidden" name="CustIP" value="192.168.2.35">
