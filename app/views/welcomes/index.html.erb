@@ -1,0 +1,44 @@
+<h1>EGHL Test</h1>
+<%= button_to "Checkout Cart", checkout_path, method: :get %>
+
+<br><br>
+<h3>Payment Flow</h3>
+
+<p>
+    <strong>User Clicks "Checkout Cart"</strong>
+    <br>GET welcomes#checkout_page
+    <br>Controller creates new payment with order details
+    <br>User redirected to checkout page to confirm order details & make payment
+</p>
+
+<p>
+    <strong>User clicks "Make Payment"</strong>
+    <br>Passes to Billplz handling
+</p>
+
+<div class="two columns">
+    <div>
+        <p>
+            <strong>User makes Payment w Billplz</strong>
+            <br>Billplz communicates with my backend
+            <br>GET welcomes#await_payment_response_backend    
+        </p>
+    </div>
+    <div>
+        <p>
+            <strong>User redirected to "Await payment response" page</strong>
+            <br>GET welcomes#await_payment_response to update bill payment status
+            <br>on page load, Recursive JS runs AJAX to check backend of payment status update to determine redirect
+            <br>AJAX Calls to welcomes#check_payment_status
+        </p>
+    </div>
+</div>
+
+<div class="two columns">
+    <div>
+        <strong>Payment Success</strong>
+    </div>
+    <div>
+        <strong>Payment Error</strong>
+    </div>
+</div>
