@@ -1,6 +1,6 @@
 class WelcomesController < ApplicationController
     before_action :set_payment, except: [:index, :checkout_page, :make_payment]
-    skip_before_action :verify_authenticity_token, :only => [:await_payment_response_backend]
+    skip_before_action :verify_authenticity_token, :only => [:await_payment_response_backend, :await_payment_response_redirect, :payment_response_success_redirect, :payment_response_fail_redirect]
     before_action :set_api
 
     def index        
