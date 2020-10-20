@@ -8,8 +8,12 @@ class WelcomesController < ApplicationController
 
     def checkout_page
         @payment = Payment.create()
+
+        @return_url = "https://eghl-test.herokuapp.com/await_payment_response/#{@payment.id}"
+        @callback_url = "https://eghl-test.herokuapp.com/await_payment_response_backend/#{@payment.id}"
+
         @payment_id = "TESTHOST#{Time.now.strftime("%d%m%Y%H%M")}"
-        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}https://merchA.merchdomain.com/pymtresp.aspxhttps://merchA.merchdomain.com/pymtrespcallback.aspx228.00MYR192.168.2.35780")
+        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@callback_url}228.00MYR192.168.2.35780")
     end
 
     def make_payment
