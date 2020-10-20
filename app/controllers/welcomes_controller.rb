@@ -74,6 +74,7 @@ class WelcomesController < ApplicationController
 
     # redirect url
     def await_payment_response
+        render "welcomes/await_payment_response"
     end
 
     # from frontend AJAX
@@ -82,9 +83,11 @@ class WelcomesController < ApplicationController
     end
 
     def payment_response_success
+        render "welcomes/payment_response_success"
     end
 
     def payment_response_fail
+        render "welcomes/payment_response_fail"
     end
     
     private
