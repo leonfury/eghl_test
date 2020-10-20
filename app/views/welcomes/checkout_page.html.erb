@@ -13,7 +13,7 @@
 <hr>
 <form name="frmPayment" method="post" action="https://test2pay.ghl.com/IPGSG/Payment.aspx">
     <input type="hidden" name="TransactionType" value="SALE">
-    <input type="hidden" name="PymtMethod" value="WA">
+    <input type="text" name="PymtMethod" value="ANY">
     <input type="hidden" name="ServiceID" value="sit">
     <input type="hidden" name="PaymentID" value="<%= @payment_id %>">
     <input type="hidden" name="OrderNumber" value="IJKLMN">
