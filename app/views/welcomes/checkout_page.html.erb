@@ -20,7 +20,9 @@
     <input type="hidden" name="PaymentDesc" value="Booking No: IJKLMN, Sector: KUL-BKI, First Flight Date: 26 Sep 2012">
     <input type="hidden" name="MerchantName" value="Merchant A">
     <input type="hidden" name="MerchantReturnURL" value="<%= @return_url %>">
-    <input type="hidden" name="MerchantCallbackURL" value="<%= @callback_url %>">
+    <input type="hidden" name="MerchantApprovalURL" value="<%= @approval_url %>">
+    <input type="hidden" name="MerchantUnApprovalURL" value="<%= @unapproval_url %>">
+    <input type="hidden" name="MerchantCallBackURL" value="<%= @callback_url %>">
     <input type="hidden" name="Amount" value="228.00">
     <input type="hidden" name="CurrencyCode" value="MYR">
     <input type="hidden" name="CustIP" value="192.168.2.35">

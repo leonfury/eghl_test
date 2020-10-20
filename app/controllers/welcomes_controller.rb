@@ -11,9 +11,11 @@ class WelcomesController < ApplicationController
 
         @return_url = "https://eghl-test.herokuapp.com/await_payment_response/#{@payment.id}"
         @callback_url = "https://eghl-test.herokuapp.com/await_payment_response_backend/#{@payment.id}"
+        @approval_url = "https://eghl-test.herokuapp.com/payment_response_success/#{@payment.id}"
+        @unapproval_url = "https://eghl-test.herokuapp.com/payment_response_fail/#{@payment.id}"
 
         @payment_id = "TESTHOST#{Time.now.strftime("%d%m%Y%H%M")}"
-        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@callback_url}228.00MYR192.168.2.35780")
+        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@approval_url}#{unapproval_url}#{@callback_url}228.00MYR192.168.2.35780")
     end
 
     def make_payment
