@@ -9,10 +9,10 @@ class WelcomesController < ApplicationController
     def checkout_page
         @payment = Payment.create()
 
-        @return_url = "https://eghl-test.herokuapp.com/await_payment_response/#{@payment.id}"
         @callback_url = "https://eghl-test.herokuapp.com/await_payment_response_backend/#{@payment.id}"
-        @approval_url = "https://eghl-test.herokuapp.com/payment_response_success/#{@payment.id}"
-        @unapproval_url = "https://eghl-test.herokuapp.com/payment_response_fail/#{@payment.id}"
+        @return_url = "https://eghl-test.herokuapp.com/await_payment_response_redirect/#{@payment.id}"
+        @approval_url = "https://eghl-test.herokuapp.com/payment_response_success_redirect/#{@payment.id}"
+        @unapproval_url = "https://eghl-test.herokuapp.com/payment_response_fail_redirect/#{@payment.id}"
 
         @payment_id = "TESTHOST#{Time.now.strftime("%d%m%Y%H%M")}"
         @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@approval_url}#{@unapproval_url}#{@callback_url}228.00MYR192.168.2.35780")
@@ -74,7 +74,6 @@ class WelcomesController < ApplicationController
 
     # redirect url
     def await_payment_response
-        render "welcomes/await_payment_response"
     end
 
     # from frontend AJAX
@@ -83,13 +82,24 @@ class WelcomesController < ApplicationController
     end
 
     def payment_response_success
-        render "welcomes/payment_response_success"
     end
 
     def payment_response_fail
-        render "welcomes/payment_response_fail"
+    end
+
+    def await_payment_response_redirect
+        redirect_to await_payment_response_redirect_path(@payment)
     end
     
+    def payment_response_success_redirect
+        redirect_to payment_response_success_path(@payment)
+    end
+
+    def payment_response_fail_redirect
+        redirect_to payment_response_fail_path(@payment)
+    end
+
+
     private
     def set_payment
         @payment = Payment.find(params[:id])
