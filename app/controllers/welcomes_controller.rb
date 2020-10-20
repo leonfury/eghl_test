@@ -88,14 +88,17 @@ class WelcomesController < ApplicationController
     end
 
     def await_payment_response_redirect
+        puts params
         redirect_to await_payment_response_path(@payment)
     end
     
     def payment_response_success_redirect
+        puts params
         redirect_to payment_response_success_path(@payment)
     end
 
     def payment_response_fail_redirect
+        puts params
         redirect_to payment_response_fail_path(@payment)
     end
 
