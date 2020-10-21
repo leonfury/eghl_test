@@ -38,42 +38,18 @@ class WelcomesController < ApplicationController
         
         req = req.post(
             "https://test2pay.ghl.com/IPGSG/Payment.aspx", 
-            "
-                TransactionType=SALE&
-                PymtMethod=ANY&
-                ServiceID=#{@api_id}&
-                PaymentID=#{@payment_id}&
-                OrderNumber=#{@payment_id}&
-                PaymentDesc=-&
-                MerchantName=Test&
-                MerchantApprovalURL=#{@approval_url}&
-                MerchantUnApprovalURL=#{@unapproval_url}&
-                MerchantCallbackURL=#{@callback_url}&
-                MerchantReturnURL=#{@return_url}&
-                Amount=#{@amount}&
-                CurrencyCode=MYR&
-                CustIP=192.168.2.35&
-                CustName=-&
-                CustEmail=kliwaru@gmail.com&
-                CustPhone=0173221955&
-                HashValue=#{@hashval}&
-                LanguageCode=en&
-                PageTimeout=#{@timeout}
-            ",
-            {
-                "Content-Type" => "text/html"
-            }
+            "TransactionType=SALE&PymtMethod=ANY&ServiceID=#{@api_id}&PaymentID=#{@payment_id}&OrderNumber=#{@payment_id}&PaymentDesc=-&MerchantName=Test&MerchantApprovalURL=#{@approval_url}&MerchantUnApprovalURL=#{@unapproval_url}&MerchantCallbackURL=#{@callback_url}&MerchantReturnURL=#{@return_url}&Amount=#{@amount}&CurrencyCode=MYR&CustIP=192.168.2.35&CustName=-&CustEmail=kliwaru@gmail.com&CustPhone=0173221955&HashValue=#{@hashval}&LanguageCode=en&PageTimeout=#{@timeout}"
         )
         puts "==============================================================="
         puts req
-
+        
         if req.status == 200
             puts "==============================================================="
             puts req.status
             puts "\n\n\n"
             puts req.headers
             puts "\n\n\n"
-            puts req.body
+            # puts req.body
             puts "\n\n\n"
             render inline: req.body
         else
@@ -84,6 +60,7 @@ class WelcomesController < ApplicationController
 
     # callback_url for billplz
     def await_payment_response_backend 
+        puts params
         @payment.update(details: params)
         if params["paid"] == "true"
             @payment.update(payment_status: "success")
