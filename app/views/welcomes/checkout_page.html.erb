@@ -16,7 +16,7 @@
     <input type="text" name="PymtMethod" value="ANY">
     <input type="hidden" name="ServiceID" value="sit">
     <input type="hidden" name="PaymentID" value="<%= @payment_id %>">
-    <input type="hidden" name="OrderNumber" value="IJKLMN">
+    <input type="hidden" name="OrderNumber" value="<%= @payment_id %>">
     <input type="hidden" name="PaymentDesc" value="Booking No: IJKLMN, Sector: KUL-BKI, First Flight Date: 26 Sep 2012">
     <input type="hidden" name="MerchantName" value="Merchant A">
     <input type="hidden" name="MerchantApprovalURL" value="<%= @approval_url %>">
