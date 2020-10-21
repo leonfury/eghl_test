@@ -38,28 +38,28 @@ class WelcomesController < ApplicationController
         
         req = req.post(
             "https://test2pay.ghl.com/IPGSG/Payment.aspx", 
-            {
-                "TransactionType": "SALE",
-                "PymtMethod": "ANY",
-                "ServiceID": @api_id, # for
-                "PaymentID": @payment_id,
-                "OrderNumber": @payment_id,
-                "PaymentDesc": "-",
-                "MerchantName": "Test",
-                "MerchantApprovalURL": @approval_url, # redirect path when payment successful
-                "MerchantUnApprovalURL": @unapproval_url, # redirect path when payment fail
-                "MerchantCallbackURL": @callback_url, # eghl calls my backend
-                "MerchantReturnURL": @return_url, # redirect path fallback 
-                "Amount": @amount,
-                "CurrencyCode": "MYR",
-                "CustIP": "192.168.2.35",
-                "CustName": "-",
-                "CustEmail": "kliwaru@gmail.com",
-                "CustPhone": "0173221955",
-                "HashValue": @hashval,
-                "LanguageCode": "en",
-                "PageTimeout": @timeout,
-            }.to_json,
+            "
+                TransactionType=SALE&
+                PymtMethod=ANY&
+                ServiceID=#{@api_id}&
+                PaymentID=#{@payment_id}&
+                OrderNumber=#{@payment_id}&
+                PaymentDesc=-&
+                MerchantName=Test&
+                MerchantApprovalURL=#{@approval_url}&
+                MerchantUnApprovalURL=#{@unapproval_url}&
+                MerchantCallbackURL=#{@callback_url}&
+                MerchantReturnURL=#{@return_url}&
+                Amount=#{@amount}&
+                CurrencyCode=MYR&
+                CustIP=192.168.2.35&
+                CustName=-&
+                CustEmail=kliwaru@gmail.com&
+                CustPhone=0173221955&
+                HashValue=#{@hashval}&
+                LanguageCode=en&
+                PageTimeout=#{@timeout}
+            ",
             {
                 "Content-Type" => "text/html"
             }
