@@ -58,6 +58,13 @@ class WelcomesController < ApplicationController
         )
 
         if req.status == 200
+            puts "==============================================================="
+            puts req.status
+            puts "\n\n\n"
+            puts req.headers
+            puts "\n\n\n"
+            puts req.body
+            puts "\n\n\n"
             render inline: req.body
         else
             notice = "SOMETHING WENT WRONG!"
