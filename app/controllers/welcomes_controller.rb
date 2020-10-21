@@ -44,7 +44,7 @@ class WelcomesController < ApplicationController
                 "PymtMethod": "ANY",
                 "ServiceID": @api_id, # for
                 "PaymentID": @payment_id,
-                "OrderNumber": "A3BHPF",
+                "OrderNumber": "IJKLMN",
                 "PaymentDesc": "-",
                 "MerchantApprovalURL": @approval_url, # redirect path when payment successful
                 "MerchantUnApprovalURL": @unapproval_url, # redirect path when payment fail
@@ -53,10 +53,11 @@ class WelcomesController < ApplicationController
                 "Amount": @amount,
                 "CurrencyCode": "MYR",
                 "HashValue": @hashval,
-                "CustIP": "192.168.2.35780",
+                "CustIP": "192.168.2.35",
                 "CustName": "-",
                 "CustEmail": "kliwaru@gmail.com",
                 "CustPhone": "0173221955",
+                "PageTimeout": "780",
             }.to_json,
             {
                 "Content-Type" => "text/html"
