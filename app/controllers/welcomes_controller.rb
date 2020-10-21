@@ -22,7 +22,6 @@ class WelcomesController < ApplicationController
 
     def make_payment
         @payment = Payment.create()
-
         @amount = params[:amount]
 
         @callback_url = "https://eghl-test.herokuapp.com/await_payment_response_backend/#{@payment.id}"
@@ -30,13 +29,12 @@ class WelcomesController < ApplicationController
         @approval_url = "https://eghl-test.herokuapp.com/payment_response_success_redirect/#{@payment.id}"
         @unapproval_url = "https://eghl-test.herokuapp.com/payment_response_fail_redirect/#{@payment.id}"
         @payment_id = "TEST#{Time.now.strftime('%d%m%Y%H%M%S')}"
+        @timeout = 780
         
+        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@approval_url}#{@unapproval_url}#{@callback_url}#{@amount}MYR192.168.2.35#{@timeout}")
         req = Faraday.new do |f|
             f.adapter :net_http
         end
-        
-
-        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@approval_url}#{@unapproval_url}#{@callback_url}#{@amount}MYR192.168.2.35780")
         
         req = req.post(
             "https://test2pay.ghl.com/IPGSG/Payment.aspx", 
@@ -47,18 +45,20 @@ class WelcomesController < ApplicationController
                 "PaymentID": @payment_id,
                 "OrderNumber": @payment_id,
                 "PaymentDesc": "-",
+                "MerchantName": "Test",
                 "MerchantApprovalURL": @approval_url, # redirect path when payment successful
                 "MerchantUnApprovalURL": @unapproval_url, # redirect path when payment fail
-                "MerchantReturnURL": @return_url, # redirect path fallback 
                 "MerchantCallbackURL": @callback_url, # eghl calls my backend
+                "MerchantReturnURL": @return_url, # redirect path fallback 
                 "Amount": @amount,
                 "CurrencyCode": "MYR",
-                "HashValue": @hashval,
                 "CustIP": "192.168.2.35",
                 "CustName": "-",
                 "CustEmail": "kliwaru@gmail.com",
                 "CustPhone": "0173221955",
-                "PageTimeout": "780",
+                "HashValue": @hashval,
+                "LanguageCode": "en",
+                "PageTimeout": @timeout,
             }.to_json,
             {
                 "Content-Type" => "text/html"
