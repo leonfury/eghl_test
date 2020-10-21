@@ -7,8 +7,8 @@ class WelcomesController < ApplicationController
     end
 
     def checkout_page
-        @amount = params[:amount]
         @payment = Payment.create()
+        @amount = params[:amount]
 
         @callback_url = "https://eghl-test.herokuapp.com/await_payment_response_backend/#{@payment.id}"
         @return_url = "https://eghl-test.herokuapp.com/await_payment_response_redirect/#{@payment.id}"
@@ -21,33 +21,39 @@ class WelcomesController < ApplicationController
 
     def make_payment
         @payment = Payment.create()
+
+        @amount = params[:amount]
+
+        @callback_url = "https://eghl-test.herokuapp.com/await_payment_response_backend/#{@payment.id}"
+        @return_url = "https://eghl-test.herokuapp.com/await_payment_response_redirect/#{@payment.id}"
+        @approval_url = "https://eghl-test.herokuapp.com/payment_response_success_redirect/#{@payment.id}"
+        @unapproval_url = "https://eghl-test.herokuapp.com/payment_response_fail_redirect/#{@payment.id}"
+        @payment_id = "TESTHOST#{Time.now.strftime("%d%m%Y%H%M")}"
+        
         req = Faraday.new do |f|
             f.adapter :net_http
         end
+        
 
-        approve_url =
-        fail_url =
-        return_url =
-        callback_url = 
-        hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}A3BHPF20171001018074S2SS2SS2SS2S299.48MYR192.168.1.1")
-
+        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@approval_url}#{@unapproval_url}#{@callback_url}#{@amount}MYR192.168.2.35780")
+        
         req = req.post(
             "https://test2pay.ghl.com/IPGSG/Payment.aspx", 
             {
                 "TransactionType": "SALE",
                 "PymtMethod": "ANY",
                 "ServiceID": @api_id, # for
-                "PaymentID": "A3BHPF20171001018074",
+                "PaymentID": @payment_id,
                 "OrderNumber": "A3BHPF",
                 "PaymentDesc": "-",
-                "MerchantApprovalURL": "S2S", # redirect path when payment successful
-                "MerchantUnApprovalURL": "S2S", # redirect path when payment fail
-                "MerchantReturnURL": "S2S", # redirect path fallback 
-                "MerchantCallbackURL": "S2S", # eghl calls my backend
-                "Amount": "299.48",
+                "MerchantApprovalURL": @approval_url, # redirect path when payment successful
+                "MerchantUnApprovalURL": @unapproval_url, # redirect path when payment fail
+                "MerchantReturnURL": @return_url, # redirect path fallback 
+                "MerchantCallbackURL": @callback_url, # eghl calls my backend
+                "Amount": @amount,
                 "CurrencyCode": "MYR",
-                "HashValue": hashval,
-                "CustIP": "192.168.1.1",
+                "HashValue": @hashval,
+                "CustIP": "192.168.2.35780",
                 "CustName": "-",
                 "CustEmail": "kliwaru@gmail.com",
                 "CustPhone": "0173221955",
