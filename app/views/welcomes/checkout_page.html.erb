@@ -12,25 +12,25 @@
 
 <hr>
 <form name="frmPayment" method="post" action="https://test2pay.ghl.com/IPGSG/Payment.aspx">
-    <input type="hidden" name="TransactionType" value="SALE">
+    <input type="text" name="TransactionType" value="SALE">
     <input type="text" name="PymtMethod" value="ANY">
-    <input type="hidden" name="ServiceID" value="sit">
-    <input type="hidden" name="PaymentID" value="<%= @payment_id %>">
-    <input type="hidden" name="OrderNumber" value="<%= @payment_id %>">
-    <input type="hidden" name="PaymentDesc" value="Booking No: IJKLMN, Sector: KUL-BKI, First Flight Date: 26 Sep 2012">
-    <input type="hidden" name="MerchantName" value="Merchant A">
-    <input type="hidden" name="MerchantApprovalURL" value="<%= @approval_url %>">
-    <input type="hidden" name="MerchantUnApprovalURL" value="<%= @unapproval_url %>">
-    <input type="hidden" name="MerchantCallBackURL" value="<%= @callback_url %>">
-    <input type="hidden" name="MerchantReturnURL" value="<%= @return_url %>">
+    <input type="text" name="ServiceID" value="<%= @api_id %>">
+    <input type="text" name="PaymentID" value="<%= @payment_id %>">
+    <input type="text" name="OrderNumber" value="<%= @payment_id %>">
+    <input type="text" name="PaymentDesc" value="Booking No: IJKLMN, Sector: KUL-BKI, First Flight Date: 26 Sep 2012">
+    <input type="text" name="MerchantName" value="Merchant A">
+    <input type="text" name="MerchantApprovalURL" value="<%= @approval_url %>">
+    <input type="text" name="MerchantUnApprovalURL" value="<%= @unapproval_url %>">
+    <input type="text" name="MerchantCallBackURL" value="<%= @callback_url %>">
+    <input type="text" name="MerchantReturnURL" value="<%= @return_url %>">
     <input type="text" name="Amount" value="<%= @amount %>">
-    <input type="hidden" name="CurrencyCode" value="MYR">
-    <input type="hidden" name="CustIP" value="192.168.2.35">
-    <input type="hidden" name="CustName" value="Jason">
-    <input type="hidden" name="CustEmail" value="Jasonabc@gmail.com">
-    <input type="hidden" name="CustPhone" value="60121235678">
-    <input type="hidden" name="HashValue" value="<%= @hashval %>">
-    <input type="hidden" name="LanguageCode" value="en">
-    <input type="hidden" name="PageTimeout" value="780">
+    <input type="text" name="CurrencyCode" value="MYR">
+    <input type="text" name="CustIP" value="192.168.2.35">
+    <input type="text" name="CustName" value="Jason">
+    <input type="text" name="CustEmail" value="Jasonabc@gmail.com">
+    <input type="text" name="CustPhone" value="60121235678">
+    <input type="text" name="HashValue" value="<%= @hashval %>">
+    <input type="text" name="LanguageCode" value="en">
+    <input type="text" name="PageTimeout" value="<%= @timeout %>">
     <input type="submit">
 </form>

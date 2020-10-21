@@ -14,9 +14,10 @@ class WelcomesController < ApplicationController
         @return_url = "https://eghl-test.herokuapp.com/await_payment_response_redirect/#{@payment.id}"
         @approval_url = "https://eghl-test.herokuapp.com/payment_response_success_redirect/#{@payment.id}"
         @unapproval_url = "https://eghl-test.herokuapp.com/payment_response_fail_redirect/#{@payment.id}"
+        @timeout = 780
 
         @payment_id = "TEST#{Time.now.strftime('%d%m%Y%H%M%S')}"
-        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@approval_url}#{@unapproval_url}#{@callback_url}#{@amount}MYR192.168.2.35780")
+        @hashval = Digest::SHA2.hexdigest("#{@api_pass}#{@api_id}#{@payment_id}#{@return_url}#{@approval_url}#{@unapproval_url}#{@callback_url}#{@amount}MYR192.168.2.35#{@timeout}")
     end
 
     def make_payment
@@ -63,6 +64,8 @@ class WelcomesController < ApplicationController
                 "Content-Type" => "text/html"
             }
         )
+        puts "==============================================================="
+        puts req
 
         if req.status == 200
             puts "==============================================================="
