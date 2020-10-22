@@ -11,7 +11,7 @@ class WelcomesController < ApplicationController
         @amount = params[:amount]
 
         @callback_url = "https://eghl-test.herokuapp.com/await_payment_response_backend/#{@payment.id}"
-        @return_url = "https://eghl-test.herokuapp.com/await_payment_response_redirect/#{@payment.id}"
+        @return_url = "https://eghl-test.herokuapp.com/await_payment_response/#{@payment.id}" # if cancel payment
         @approval_url = "https://eghl-test.herokuapp.com/payment_response_success_redirect/#{@payment.id}"
         @unapproval_url = "https://eghl-test.herokuapp.com/payment_response_fail_redirect/#{@payment.id}"
         @timeout = 780
@@ -92,11 +92,13 @@ class WelcomesController < ApplicationController
     end
     
     def payment_response_success_redirect
+        # redirect only if success else
         puts params
         redirect_to payment_response_success_path(@payment)
     end
 
     def payment_response_fail_redirect
+        # redirect only if fail else
         puts params
         redirect_to payment_response_fail_path(@payment)
     end
