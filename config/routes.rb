@@ -11,9 +11,9 @@ Rails.application.routes.draw do
     get "/payment_response_success/:id" => "welcomes#payment_response_success", as: "payment_response_success"
     get "/payment_response_fail/:id" => "welcomes#payment_response_fail", as: "payment_response_fail"
 
-    post "/await_payment_response_redirect/:id" => "welcomes#await_payment_response_redirect"
-    post "/payment_response_success_redirect/:id" => "welcomes#payment_response_success_redirect"
-    post "/payment_response_fail_redirect/:id" => "welcomes#payment_response_fail_redirect"
+    # post "/await_payment_response_redirect/:id" => "welcomes#await_payment_response_redirect"
+    # post "/payment_response_success_redirect/:id" => "welcomes#payment_response_success_redirect"
+    # post "/payment_response_fail_redirect/:id" => "welcomes#payment_response_fail_redirect"
 
 
     resources :payments

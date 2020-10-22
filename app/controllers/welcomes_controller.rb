@@ -62,8 +62,12 @@ class WelcomesController < ApplicationController
     def await_payment_response_backend 
         puts params
         @payment.update(details: params)
-        if params["paid"] == "true"
+        if params["TxnStatus"] == "0"
             @payment.update(payment_status: "success")
+        elsif params["TxnStatus"] == "1"
+            @payment.update(payment_status: "failure")
+        elsif params["TxnStatus"] == "2"
+            @payment.update(payment_status: "pending")
         end
     end
 

@@ -22,6 +22,8 @@
                     location.replace(`/payment_response_success/${id}`);
                 } else if (result["status"] == "failure") {
                     location.replace(`/payment_response_fail/${id}`);
+                } else if (result["status"] == "pending") {
+                    location.replace(`/payment_response_fail/${id}`);
                 } else {
                     setTimeout(() => {
                         checkPaymentStatus(id);
